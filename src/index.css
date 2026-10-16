@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'SiwonhanSeolreim';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/seolleimcool-SemiBold.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LOTTE SEOLLEIM cool OTF';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/seolleimcool-SemiBold.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+/* ── Display headings ──
+   One rule for every large title so the Seolleim face is applied consistently.
+   The font ships a single SemiBold weight: font-synthesis: none stops the browser
+   from faking a bolder weight (the smeared, generic look). Hangul keeps words
+   intact (keep-all) and balance avoids lonely single-word last lines. */
+.display-title {
+  font-family: 'SiwonhanSeolreim', 'Noto Sans KR', sans-serif;
+  font-weight: normal;
+  font-synthesis: none;
+  font-kerning: normal;
+  letter-spacing: -0.012em;
+  line-height: 1.2;
+  word-break: keep-all;
+  text-wrap: balance;
+}
+
+/* Latin wordmark-style titles (SHOP, NEW, EVENT…): caps need air, not tightening */
+.display-title--latin {
+  letter-spacing: 0.012em;
+  line-height: 1.04;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-color: #F3ECD5;
+  color: #37291C;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px, rgba(0, 0, 0, 0.25) 0px 4px 4px 0px inset;
+}
+
+:root {
+  --cream-bg: #F3ECD5;
+  --cream-soft: #EFE6C8;
+  --card-paper: #FBF7E9;
+  --ink-brown: #37291C;
+  --seal-red: #AB0A00;
+  --berry: #A6403C;
+  --olive: #494B1C;
+  --mustard: #B6A847;
+  --border-line: rgba(55, 41, 28, 0.18);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(55,41,28,0.2); border-radius: 4px; }
+
+/* Marquee animation */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
+/* Scroll-linked SHOP product marquee */
+.product-marquee {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(2.5rem, 6vw, 5rem) 0;
+  background: var(--cream-soft);
+  border-block: 1px solid var(--border-line);
+}
+
+.product-marquee__viewport {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black clamp(1rem, 6vw, 6rem),
+    black calc(100% - clamp(1rem, 6vw, 6rem)),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black clamp(1rem, 6vw, 6rem),
+    black calc(100% - clamp(1rem, 6vw, 6rem)),
+    transparent
+  );
+}
+
+.product-marquee__track,
+.product-marquee__segment {
+  display: flex;
+  width: max-content;
+  flex-shrink: 0;
+}
+
+.product-marquee__track {
+  will-change: transform;
+}
+
+.product-marquee__segment {
+  gap: clamp(1rem, 2.25vw, 2rem);
+  padding-right: clamp(1rem, 2.25vw, 2rem);
+}
+
+.product-marquee__item {
+  display: grid;
+  width: clamp(12rem, 22vw, 19rem);
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+  grid-template-rows: minmax(0, 1fr) auto;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 1.125rem;
+  background: var(--card-paper);
+  color: var(--ink-brown);
+  cursor: pointer;
+  font: inherit;
+  filter: drop-shadow(0 0.5rem 0.75rem rgba(55, 41, 28, 0.12));
+}
+
+.product-marquee__media {
+  display: block;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.product-marquee__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+}
+
+.product-marquee__name {
+  display: block;
+  padding: 0.625rem 0.75rem;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: clamp(0.6875rem, 1vw, 0.8125rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.product-marquee__item:focus-visible {
+  outline: 2px solid var(--seal-red);
+  outline-offset: 0.5rem;
+}
+
+/* Sheep baa-pop bubble animation */
+@keyframes baa-pop {
+  0%   { transform: scale(0.7) rotate(-4deg); opacity: 0; }
+  55%  { transform: scale(1.12) rotate(2deg); opacity: 1; }
+  80%  { transform: scale(0.96) rotate(-1deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(-2deg); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+}
+
+@keyframes floatStar {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-8px) scale(1.08); }
+}
+
+.float-sheep {
+  animation: float 4s ease-in-out infinite;
+}
+
+.float-star {
+  animation: floatStar 3s ease-in-out infinite;
+}
+
+/* Icon button tooltip */
+@keyframes tooltip-in {
+  from { opacity: 0; transform: translateX(-50%) scale(0.82) translateY(-3px); }
+  to   { opacity: 1; transform: translateX(-50%) scale(1) translateY(0); }
+}
+
+/* Drawer slide-in */
+@keyframes drawer-in {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+/* Welcome modal animations */
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.88) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Speech bubble tail */
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 20px;
+  border: 6px solid transparent;
+  border-top-color: white;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; pointer-events: none; }
+}
+@keyframes goldPulse {
+  0%, 100% { transform: scale(1);   opacity: 0.6; }
+  50%       { transform: scale(1.18); opacity: 0; }
+}
+.gold-pulse-ring {
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  border: 2px solid #B6A847;
+  animation: goldPulse 2s ease-out infinite;
+  pointer-events: none;
+}

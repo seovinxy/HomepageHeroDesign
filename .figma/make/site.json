@@ -1,0 +1,10 @@
+{
+  "description": "Explore a Korean New Year gift brand celebrating the 2027 Year of the Red Sheep with zodiac-themed products, cultural stories, and interactive fortune features.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
